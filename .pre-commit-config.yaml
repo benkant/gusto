@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-json
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: detect-private-key
+      - id: mixed-line-ending
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        types_or: [python, pyi, jupyter]
+      - id: ruff-format
+        types_or: [python, pyi, jupyter]
+
+  - repo: https://github.com/psf/black
+    rev: 23.12.0
+    hooks:
+      - id: black
+        args: ["--line-length", "100", "--target-version", "py312"]
+
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.352
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          - click>=8.1.7
+          - pydantic>=2.6.0
+          - rich>=13.7.0
+          - numpy>=1.26.0
+          - scipy>=1.12.0
+          - librosa>=0.10.1
+          - pyacoustid>=1.2.2
+          - musicbrainzngs>=0.7.1
+          - soundfile>=0.12.1 

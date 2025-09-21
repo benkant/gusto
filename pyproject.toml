@@ -1,0 +1,110 @@
+# replace with `uv`.
+[build-system]
+requires = ["uv"]
+build-backend = "uv.build"
+
+[project]
+name = "music-stem-separator"
+version = "0.1.0"
+description = "Audio analysis, metadata extraction, and stem separation tools"
+authors = [
+    {name = "Ben Kant", email = "ben@example.com"},
+]
+dependencies = [
+    # CLI and core dependencies
+    "click>=8.1.7",
+    "pydantic>=2.6.0",
+    "rich>=13.7.0",
+    
+    # Audio processing
+    "numpy>=1.26.0",
+    "scipy>=1.12.0",
+    
+    # Audio analysis libraries
+    "librosa>=0.10.1",
+    "essentia>=2.1b6.dev1026",
+    
+    # Audio fingerprinting and metadata
+    "pyacoustid>=1.2.2",
+    "musicbrainzngs>=0.7.1",
+    
+    # Audio file handling
+    "soundfile>=0.12.1",
+    
+    # Stem separation
+    "demucs>=4.0.0",
+    
+    # MacOS optimizations
+    "tensorflow-macos>=2.15.0",
+    "tensorflow-metal>=1.1.0"
+]
+requires-python = ">=3.12,<3.13"
+readme = "README.md"
+license = {text = "PROPRIETARY"}
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.9",
+    "pyright>=1.1.352"
+]
+
+extra = [
+    "aubio>=0.4.9",
+    "madmom>=0.16.1"
+]
+
+[project.scripts]
+analyse = "music_stem_separator.cli:analyse"
+split = "music_stem_separator.cli:split"
+
+[tool.uv]
+python-version = "3.12"
+packages-dir = ".venv"
+no-cache = false
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+reportUnknownMemberType = "warning"
+reportUnknownParameterType = "warning"
+reportUnknownVariableType = "warning"
+reportUnknownArgumentType = "warning"
+reportPrivateUsage = "warning"
+pythonVersion = "3.12"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "N",  # pep8-naming
+    "ANN", # flake8-annotations
+    "S",  # flake8-bandit
+    "A",  # flake8-builtins
+]
+ignore = [
+    "ANN101",  # Missing type annotation for `self`
+    "ANN102",  # Missing type annotation for `cls`
+]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line-length = 100
+
+[tool.pytest.ini_options]
+addopts = "--cov=music_stem_separator"
+testpaths = ["tests"] 

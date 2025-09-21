@@ -1,0 +1,9 @@
+{
+    "terminal.enableAppInsights": false,
+    "showRuffHoverDiagnostics": true,
+    "disablePylance": false,
+    "preferRuffOverPylance": false,
+    "python.analysis.typeCheckingMode": "strict",
+    "format.autoFormatOnSave": true,
+    "python.packageManager": "uv"
+}
